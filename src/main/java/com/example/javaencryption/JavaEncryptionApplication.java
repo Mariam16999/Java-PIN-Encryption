@@ -1,23 +1,35 @@
-package com.example.springencryption;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package com.example.javaencryption;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Arrays;
+import java.util.Scanner;
 
 
-public class SpringEncryptionApplication {
+public class JavaEncryptionApplication {
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        String pin = "4256";
-        String cardNumber = "5259370015781523";
-        String pinEncryptionKey = "3D7368268AE61CB502ECD0C29EBF3EFB";
-        String pinBlockFiller = "F";
+        System.out.print("Enter PIN: ");
+        String pin = scanner.nextLine();
+
+        System.out.print("Enter Card Number: ");
+        String cardNumber = scanner.nextLine();
+
+        System.out.print("Enter Encryption Key (32 hex digits): ");
+        String pinEncryptionKey = scanner.nextLine();
+
+        System.out.print("Enter PIN Block Filler(0 or F): ");
+        String pinBlockFiller = scanner.nextLine();
+
+
+//        String pin = "4256";
+//        String cardNumber = "5259370015781523";
+//        String pinEncryptionKey = "3D7368268AE61CB502ECD0C29EBF3EFB";
+//        String pinBlockFiller = "F";
 
         // Step 1: Create the PIN Block
         int pinLength = pin.length();
