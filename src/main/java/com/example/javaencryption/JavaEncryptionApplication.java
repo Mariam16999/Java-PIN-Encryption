@@ -63,7 +63,8 @@ public class JavaEncryptionApplication {
             String encryptedPinBlockHex = DatatypeConverter.printHexBinary(encryptedPinBlock).toUpperCase();
             System.out.println("Encrypted PIN Block: " + encryptedPinBlockHex);
         } catch (Exception e) {
-            e.printStackTrace();
+           // e.printStackTrace();
+            System.out.println("Invalid Data");
         }
     }
 
