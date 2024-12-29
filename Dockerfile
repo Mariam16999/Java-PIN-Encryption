@@ -1,20 +1,14 @@
-# Start with a base image containing OpenJDK
+# Use an official openjdk image as the base
 FROM openjdk:21-jdk-slim
 
-# Set the working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Maven project files
-COPY pom.xml .
-COPY src ./src
+# Copy the application JAR file into the container
+COPY target/spring-encryption-0.0.1-SNAPSHOT.jar /app/spring-encryption.jar
 
-# Install Maven dependencies and package the application
-RUN apt-get update && apt-get install -y maven \
-    && mvn clean package -DskipTests \
-    && mv target/*.jar app.jar
-
-# Expose the new application port
+# Expose the port the app will run on
 EXPOSE 8081
 
-# Define the entry point
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Command to run the app
+ENTRYPOINT ["java", "-jar", "spring-encryption.jar"]
