@@ -10,19 +10,20 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 script {
-                    // Clone the repository from GitHub
                     git branch: 'main', 
                         url: "${GIT_REPO}", 
                         credentialsId: 'git'
                 }
             }
         }
-        
+
         stage('Build JAR') {
             steps {
                 script {
-                    // Build the Java application JAR using Maven
-                    sh 'mvn clean install'
+                    // Use Maven Docker image with JDK 21
+                    docker.image('maven:3.8.4-openjdk-21').inside {
+                        sh 'mvn clean install'
+                    }
                 }
             }
         }
