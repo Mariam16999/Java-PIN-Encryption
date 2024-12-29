@@ -20,8 +20,8 @@ pipeline {
         stage('Build JAR') {
             steps {
                 script {
-                    // Use Maven Docker image with JDK 21
-                    docker.image('maven:3.8.4-openjdk-21').inside {
+                    // Use Maven Docker image with JDK 17 (valid tag)
+                    docker.image('maven:3.8.4-openjdk-17').inside {
                         sh 'mvn clean install'
                     }
                 }
@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image from the Dockerfile
-                    sh 'docker build -t ${DOCKER_IMAGE} .'
+                    sh "docker build -t ${DOCKER_IMAGE} ."
                 }
             }
         }
@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script {
                     // Run the container and map the ports
-                    sh 'docker run -d -p 8082:8081 ${DOCKER_IMAGE}'
+                    sh "docker run -d -p 8082:8081 ${DOCKER_IMAGE}"
                 }
             }
         }
