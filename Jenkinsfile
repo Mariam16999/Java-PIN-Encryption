@@ -2,16 +2,24 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Clone Repository') {
             steps {
-                echo 'Building the application...'
-                sh './mvnw clean package'
+                git 'https://github.com/Mariam16999/Java-PIN-Encryption.git'
             }
         }
-        stage('Test') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Test the application...'
-                
+                script {
+                    sh 'docker build -t java-pin-encryption .'
+                }
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    // Map container's port 8081 to host's port 8082
+                    sh 'docker run -d -p 8082:8081 java-pin-encryption'
+                }
             }
         }
     }
