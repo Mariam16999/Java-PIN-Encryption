@@ -11,7 +11,7 @@ pipeline {
                 script {
                     git branch: 'main', 
                         url: "${GIT_REPO}", 
-                        credentialsId: 'git-credentials'
+                        credentialsId: 'git'
                 }
             }
         }
